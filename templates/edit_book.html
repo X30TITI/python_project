@@ -1,0 +1,31 @@
+{% extends 'admin_home.html' %}
+{% block body %}
+<br>
+<h1>Edit Book</h1>
+{% from "includes/_formhelpers.html" import render_field %}
+<form method="POST" action="">
+    <div class="form-group">
+        {{render_field(form.id, class_="form-control", value=book.id)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.title, class_="form-control", value=book.title)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.author, class_="form-control", value=book.author)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.category, class_="form-control", value=book.category)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.num_pages, class_="form-control", value=book.num_pages)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.publication_date, class_="form-control", type="date", value=book.publication_date)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.available_quantity, class_="form-control", value=book.available_quantity)}}
+    </div>
+    <br>
+    <p><button type="submit" class="btn btn-primary" value="Submit">Submit</button></p>
+</form>
+{% endblock %}

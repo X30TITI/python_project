@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Information</title>
+    <style>
+        body {
+            font-family: 'Amazon Ember', Arial, sans-serif;
+            margin: 20px;
+            background-color: #f3f3f3;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .book-container {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 20px;
+            max-width: 600px; /* Increased width for the image */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin: auto;
+            overflow: hidden; /* Clearfix to contain the floated image */
+        }
+
+        .book-info {
+            margin-bottom: 10px;
+        }
+
+        strong {
+            color: #c45500;
+        }
+
+        span {
+            color: #333;
+        }
+
+        img {
+            float: left; /* Float the image to the left */
+            margin-right: 20px; /* Provide some spacing between image and text */
+            max-width: 100px; /* Adjust the width of the image */
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Book Information</h1>
+    <div class="book-container">
+        <img src="book-cover.jpg" alt="Book Cover">
+        <div class="book-info">
+            <strong>Title:</strong> <span id="title">Book Title</span>
+        </div>
+        <div class="book-info">
+            <strong>Author:</strong> <span id="author">Author Name</span>
+        </div>
+        <div class="book-info">
+            <strong>Publication Year:</strong> <span id="year">YYYY</span>
+        </div>
+        <div class="book-info">
+            <strong>ISBN:</strong> <span id="isbn">ISBN Number</span>
+        </div>
+    </div>
+</body>
+</html>
