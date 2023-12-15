@@ -1,19 +1,14 @@
 {% extends 'user_home.html' %}
 {% block body %}
-
 <title>Danh sách sách</title>
 <link
 rel="stylesheet"
 href="{{ url_for('static', filename='css/listBook.css') }}"/>  
-
-
-
     <div id="wrapper">
         <div class="headline">
             <h3>Dành cho bạn</h3>
         </div>
         {% if books %}
-     
         <ul class="products">
             {% for book in books %}
             <li>
@@ -22,10 +17,11 @@ href="{{ url_for('static', filename='css/listBook.css') }}"/>
                         <a href="" class="product-thumb">
                             <img src="{{url_for('static', filename=book.image_path)}}"/>
                         </a>
-                        <a href="" class="buy-now">Đọc ngay</a>
+                        <a href="borrow_book/{{book.id}}" class="buy-now">Mượn sách</a>
                         <!-- //Đọc ngay -->
                     </div>
                     <div class="products-info">
+                        <div class="product-author">{{book.id}}</div>
                         <a href="" class="product-name"> <b>{{book.title}}</b></a>
                         <div class="product-author">{{book.author}}</div>
                         <div class="product-author">{{book.category}}</div>
@@ -36,6 +32,5 @@ href="{{ url_for('static', filename='css/listBook.css') }}"/>
             {%endfor%}
         </ul>
     </div>
-   
 {% endif %}
 {% endblock %}

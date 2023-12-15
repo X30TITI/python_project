@@ -1,0 +1,23 @@
+{% extends 'user_home.html' %}
+{% block body %}
+<br>
+<h1>Mượn sách</h1>
+{% from "includes/_formhelpers.html" import render_field%}
+<form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        <img src="{{ url_for('static', filename=book.image_path) }}" style="width: 200px; height: auto;"/>
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.id, class_="form-control", value=book.id)}}
+    </div><br>       
+    <div class="form-group">
+        {{render_field(form.id, class_="form-control", value=.id)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.image, class_="form-control", id="book_image")}}
+        <img id="image_preview" src="#" alt="Image preview" style="display:none; width: 200px;"/>
+    </div><br>
+    <p><button type="submit" class="btn btn-primary" value="Submit">Submit</button></p>
+</form>
+{% endblock %}

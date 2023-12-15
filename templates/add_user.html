@@ -1,0 +1,24 @@
+{% extends 'admin_home.html' %}
+{% block body %}
+<br>
+<h1>Thêm người dùng</h1>
+{% from "includes/_formhelpers.html" import render_field%}
+<form method="POST" action="" enctype="multipart/form-data">
+    <div class="form-group">
+        {{render_field(form.userName, class_="form-control")}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.password, class_="form-control")}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.email, class_="form-control")}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.phonenumber, class_="form-control")}}
+    </div><br>
+    <div class="form-group">  
+        {{render_field(form.role, class_="form-control")}}
+    </div><br>
+    <p><button type="submit" class="btn btn-primary" value="Submit">Submit</button></p>
+</form>
+{% endblock %}

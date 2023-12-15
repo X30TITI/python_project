@@ -1,0 +1,40 @@
+{% extends 'admin_home.html' %}
+{% block body %}
+<br>
+<h1>Users</h1>
+<a class="btn btn-success" href="/add_user">Thêm người dùng</a>
+<hr>
+{% if users%}
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Passoword</th>
+            <th>Email</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr style="cursor:pointer;">
+            <td>{{user.id}}</td>
+            <td>{{user.username}}</td>
+            <td >{{user.password}}</td>
+            <td >{{user.email}}</td>
+            <td><a href="edit_user/{{user.id}}" class="btn btn-primary pull-right">Edit</a></td>
+            <td>
+                <form action="" method="POST"
+                    onsubmit="return confirm('Are you sure you want to delete this book?');">
+                    <input type="hidden" name="method" value="Delete">
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

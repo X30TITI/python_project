@@ -29,7 +29,6 @@
     <div class="form-group">
         {{render_field(form.image, class_="form-control", id="book_image")}}
         <img id="image_preview" src="#" alt="Image preview" style="display:none; width: 200px;"/>
-        <!-- <button type="button" id="clear-image" class="btn btn-warning">Clear Image</button> -->
     </div><br>
     <p><button type="submit" class="btn btn-primary" value="Submit">Submit</button></p>
 </form>
@@ -49,12 +48,6 @@
                 reader.readAsDataURL(event.target.files[0]);
             }
         });
-    // Clear the selected image
-        // clearImageButton.addEventListener('click', function() {
-        //     imageInput.value = ''; // Clear the input
-        //     imagePreview.style.display = 'none'; // Hide the preview
-        //     imagePreview.src = ''; // Remove the image source
-        // });
     });
 </script>
 {% endblock %}
