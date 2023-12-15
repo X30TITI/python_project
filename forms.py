@@ -1,5 +1,9 @@
 from wtforms import validators, Form, StringField, PasswordField, TextAreaField
 from wtforms import StringField, FloatField, IntegerField, DateField, SelectField
+from wtforms.validators import DataRequired, Length, Email
+from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+
 
 
 class loginForm(Form):
@@ -15,7 +19,7 @@ class loginForm(Form):
     )
 
 
-class AddBook(Form):
+class AddBook(FlaskForm):
     id = StringField('Book ID', [validators.Length(min=1, max=11)])
     title = StringField('Title', [validators.Length(min=2, max=255)])
     author = StringField('Author(s)', [validators.Length(min=2, max=255)])
@@ -25,6 +29,7 @@ class AddBook(Form):
         'Publication Date', [validators.InputRequired()])
     available_quantity = IntegerField(
         'Total No. of Books', [validators.NumberRange(min=1)])
+    image = FileField('Image', validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
 
 
 class signUpForm(Form):

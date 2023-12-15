@@ -1,0 +1,41 @@
+{% extends 'user_home.html' %}
+{% block body %}
+
+<title>Danh sách sách</title>
+<link
+rel="stylesheet"
+href="{{ url_for('static', filename='css/listBook.css') }}"/>  
+
+
+
+    <div id="wrapper">
+        <div class="headline">
+            <h3>Dành cho bạn</h3>
+        </div>
+        {% if books %}
+     
+        <ul class="products">
+            {% for book in books %}
+            <li>
+                <div class="product-item">
+                    <div class="product-top">
+                        <a href="" class="product-thumb">
+                            <img src="{{url_for('static', filename=book.image_path)}}"/>
+                        </a>
+                        <a href="" class="buy-now">Đọc ngay</a>
+                        <!-- //Đọc ngay -->
+                    </div>
+                    <div class="products-info">
+                        <a href="" class="product-name"> <b>{{book.title}}</b></a>
+                        <div class="product-author">{{book.author}}</div>
+                        <div class="product-author">{{book.category}}</div>
+                        <div class="product-author">{{book.num_pages}}</div>
+                    </div>
+                </div>
+            </li>
+            {%endfor%}
+        </ul>
+    </div>
+   
+{% endif %}
+{% endblock %}

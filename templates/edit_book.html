@@ -24,8 +24,14 @@
     </div><br>
     <div class="form-group">
         {{render_field(form.available_quantity, class_="form-control", value=book.available_quantity)}}
-    </div>
-    <br>
+    </div><br>
+    
+    <div class="form-group">
+        <img src="{{ url_for('static', filename=book.image_path) }}" style="width: 200px; height: auto;"/>
+       
+    </div><br>
+    
     <p><button type="submit" class="btn btn-primary" value="Submit">Submit</button></p>
 </form>
+
 {% endblock %}
