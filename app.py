@@ -1,5 +1,5 @@
 from flask import Flask, flash,render_template, request, redirect, url_for, session, send_from_directory
-from forms import loginForm, AddBook, signUpForm, BorrowBook
+from forms import loginForm, AddBook, signUpForm, BorrowBook, BorrowSubmitForm
 # from flask_uploads import UploadSet, IMAGES, configure_uploads
 import MySQLdb
 from werkzeug.utils import secure_filename
@@ -151,6 +151,56 @@ def borrow_book(id):
         return redirect(url_for("user"))
     return render_template("borrow_book.html", form=form, book=book)
 
+@app.route("/borrow_list", methods = ["GET", "POST"])
+def borrow_list():
+    cur = mysql.connection.cursor()
+    result = cur.execute("""SELECT borrowing_id, title, username,borrow_date, due_date, return_date 
+                        FROM books b INNER JOIN transactions t ON b.id = t.book_id 
+                        INNER JOIN account a ON t.user_id = a.id 
+                        where return_date is null""")
+    historys = cur.fetchall()
+    if result > 0:
+        return render_template("admin_borrow_list.html", historys = historys)
+    else:
+        msg = "Khong co cuon sach nao"
+        return render_template("admin_borrow_list.html", msg = msg)
+    cur.close()
+
+@app.route("/borrow_submit/<string:id>", methods = ["GET", "POST"])
+def borrow_submit(id):
+    form = BorrowSubmitForm()
+    cur = mysql.connection.cursor()
+    result = cur.execute("""SELECT borrowing_id, title, username,borrow_date, due_date, return_date
+                        FROM books b INNER JOIN transactions t ON b.id = t.book_id 
+                        INNER JOIN account a ON t.user_id = a.id 
+                        where return_date is null and borrowing_id=%s""", [id])
+    history = cur.fetchone()
+    print(history["borrowing_id"])
+    if request.method == "POST" and form.validate():
+        cur.execute("UPDATE transactions SET return_date=%s WHERE borrowing_id=%s", [
+            form.return_date.data,
+            id])
+        mysql.connection.commit()
+        cur.close()
+        flash("Xac nhan", "success")
+        return redirect(url_for('borrow_list'))
+    return render_template("admin_borrow_submit.html", form=form, history=history)
+
+@app.route("/history_borrow", methods = ["GET", "POST"])
+def history_borrow():
+    user_info = session.get("userName")
+    print(user_info)
+    cur = mysql.connection.cursor()
+    result = cur.execute("""SELECT book_id, title, username,borrow_date, due_date, return_date
+                            FROM books b INNER JOIN transactions t ON b.id = t.book_id 
+                            INNER JOIN account a ON t.user_id = a.id 
+                            where return_date is not null and username=%s""", [user_info])
+    historys = cur.fetchall()
+    mysql.connection.commit()
+    cur.close()
+    return render_template("history_borrow_user.html", historys=historys)
+
+
 @app.route("/user_info", methods=["GET", "POST"])
 def user_info():
     cur = mysql.connection.cursor()
@@ -284,6 +334,7 @@ def login(direct):
                 cur = mysql.connection.cursor()
                 cur.execute("SELECT username, password, role FROM account WHERE lower(userName) = %s", (userName.lower(),))
                 user = cur.fetchone()
+            
                 if not user:
                     flash("Tài khoản không tồn tại", "error")
                 else:
@@ -323,6 +374,7 @@ def user():
     cur = mysql.connection.cursor()
     result = cur.execute("SELECT id, title, author, category, publication_date, num_pages, available_quantity, image_path FROM books")
     books = cur.fetchall()
+
     if result > 0:
         return render_template("user.html", books = books)
     else:

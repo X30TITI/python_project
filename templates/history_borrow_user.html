@@ -1,0 +1,34 @@
+{% extends 'user_home.html' %}
+{% block body %}
+<br>
+<h1>History Borrow</h1>
+{% if historys %}
+<table class="table table-hover table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Username</th>
+            <th>Borrow_date</th>
+            <th>Due_date</th>
+            <th>Return_date</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for history in historys %}
+        <tr style="cursor:pointer;">
+            <td>{{history.book_id}}</td>
+            <td>{{history.title}}</td>
+            <td>{{history.username}}</td>
+            <td>{{history.borrow_date}}</td>
+            <td>{{history.due_date}}</td>
+            <td>{{history.return_date}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+{% endblock %}

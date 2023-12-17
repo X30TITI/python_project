@@ -1,0 +1,28 @@
+{% extends 'admin_home.html' %}
+{% block body %}
+<br>
+<h1>Submit</h1>
+{% from "includes/_formhelpers.html" import render_field %}
+<form method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <div class="form-group">
+        {{render_field(form.borrowing_id, class_="form-control", value=history.borrowing_id, readonly=True)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.title, class_="form-control", value=history.title, readonly=True)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.username, class_="form-control", value=history.username, readonly=True)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.borrow_date, class_="form-control", value=history.borrow_date, readonly=True)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.due_date, class_="form-control", type="date", value=history.due_date, readonly=True)}}
+    </div><br>
+    <div class="form-group">
+        {{render_field(form.return_date, class_="form-control", type="date")}}
+    </div><br>
+    <p><button type="submit" class="btn btn-primary" value="Submit">Xac nhan</button></p>
+</form>
+{% endblock %}

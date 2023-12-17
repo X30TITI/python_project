@@ -4,7 +4,6 @@ from wtforms.validators import DataRequired, Length, Email
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 
-
 class loginForm(Form):
     userName = StringField(
         "Username",
@@ -39,6 +38,21 @@ class BorrowBook(FlaskForm):
    
  
 
+class BorrowSubmitForm(FlaskForm):
+    borrowing_id = StringField('Borrowing ID', [validators.Length(min=1, max=11)])
+    title = StringField('Title', [validators.Length(min=2, max=255)])
+    username = StringField(
+        "Username",
+        [validators.Length(min=4, max=25), validators.InputRequired()],
+        render_kw={"placeholder": "username"},
+    )
+    borrow_date = DateField(
+        'Borrow Date', [validators.InputRequired()])
+    due_date = DateField(
+        'Due Date', [validators.InputRequired()])
+    return_date = DateField(
+        'Return Date', [validators.InputRequired()])
+    
 
 class signUpForm(Form):
     userName = StringField(
