@@ -65,7 +65,6 @@ def books():
         return render_template("books.html", msg = msg)
     cur.close()
 
-
 @app.route("/book/<string:id>")
 def viewBook(id):
     cur = mysql.connection.cursor()
@@ -114,7 +113,6 @@ def edit_book(id):
         return redirect(url_for("books"))
     return render_template("edit_book.html", form=form, book=book)
 
-
 @app.route("/delete_book/<string:id>", methods = ["POST"])
 def delete_book(id):
     cur = mysql.connection.cursor()
@@ -158,6 +156,7 @@ def borrow_list():
                         FROM books b INNER JOIN transactions t ON b.id = t.book_id 
                         INNER JOIN account a ON t.user_id = a.id 
                         where return_date is null""")
+    
     historys = cur.fetchall()
     if result > 0:
         return render_template("admin_borrow_list.html", historys = historys)
@@ -281,7 +280,6 @@ def admin_home():
 def user_home():
     return render_template("user_home.html")
 
-
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
     form = signUpForm(request.form)
@@ -365,9 +363,7 @@ def logout():
 @app.route("/index")
 def index():
     return render_template("index.html")
-# @app.route("/index", methods=["GET"])
-# def navbar():
-#     return render_template("navbar.html")
+
 
 @app.route("/user")
 def user():

@@ -18,40 +18,40 @@ class loginForm(Form):
 
 class AddBook(FlaskForm):
     id = StringField('Book ID', [validators.Length(min=1, max=11)])
-    title = StringField('Title', [validators.Length(min=2, max=255)])
-    author = StringField('Author(s)', [validators.Length(min=2, max=255)])
-    category = StringField('Category', [validators.Length(min=2, max=255)])
-    num_pages = IntegerField('No. of Pages', [validators.NumberRange(min=1)])
+    title = StringField('Tiêu đề', [validators.Length(min=2, max=255)])
+    author = StringField('Tác giả', [validators.Length(min=2, max=255)])
+    category = StringField('Thể loại', [validators.Length(min=2, max=255)])
+    num_pages = IntegerField('Số trang', [validators.NumberRange(min=1)])
     publication_date = DateField(
-        'Publication Date', [validators.InputRequired()])
+        'Ngày xuất bản', [validators.InputRequired()])
     available_quantity = IntegerField(
-        'Total No. of Books', [validators.NumberRange(min=1)])
-    image = FileField('Image', validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
+        'Số lượng', [validators.NumberRange(min=1)])
+    image = FileField('Anhr', validators=[FileRequired(), FileAllowed(['jpg', 'png'], 'Images only!')])
 
 class BorrowBook(FlaskForm):
     user_id = StringField('User ID', [validators.Length(min=1, max=11)])
     book_id = StringField('Book ID', [validators.Length(min=1, max=11)])
     borrow_date = DateField(
-        'Borrow Date', [validators.InputRequired()])
+        'Ngày mượn ', [validators.InputRequired()])
     due_date = DateField(
-        'Due Date', [validators.InputRequired()])
+        'Hạn trả', [validators.InputRequired()])
    
  
 
 class BorrowSubmitForm(FlaskForm):
     borrowing_id = StringField('Borrowing ID', [validators.Length(min=1, max=11)])
-    title = StringField('Title', [validators.Length(min=2, max=255)])
+    title = StringField('Tiêu đề', [validators.Length(min=2, max=255)])
     username = StringField(
-        "Username",
+        "Tên người dùng",
         [validators.Length(min=4, max=25), validators.InputRequired()],
         render_kw={"placeholder": "username"},
     )
     borrow_date = DateField(
-        'Borrow Date', [validators.InputRequired()])
+        'Ngày mượn', [validators.InputRequired()])
     due_date = DateField(
-        'Due Date', [validators.InputRequired()])
+        'Hạn trả', [validators.InputRequired()])
     return_date = DateField(
-        'Return Date', [validators.InputRequired()])
+        'Ngày trả', [validators.InputRequired()])
     
 
 class signUpForm(Form):

@@ -1,7 +1,7 @@
 {% extends 'admin_home.html' %}
 {% block body %}
 <br>
-<h1>Submit</h1>
+<h1>Đồng ý xác nhận</h1>
 {% from "includes/_formhelpers.html" import render_field %}
 <form method="POST" action="" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
@@ -23,6 +23,6 @@
     <div class="form-group">
         {{render_field(form.return_date, class_="form-control", type="date")}}
     </div><br>
-    <p><button type="submit" class="btn btn-primary" value="Submit">Xac nhan</button></p>
+    <p><button type="submit" class="btn btn-primary" value="Submit">Xác nhận</button></p>
 </form>
 {% endblock %}

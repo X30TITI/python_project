@@ -1,16 +1,16 @@
 {% extends 'admin_home.html' %}
 {% block body %}
 <br>
-<h1>List Borrow Book</h1>
+<h1>Danh sách mượn</h1>
 {% if historys %}
 <table class="table table-hover table-striped">
     <thead>
         <tr>
             <th>Id</th>
-            <th>Title</th>
+            <th>Tên sách</th>
             <th>Username</th>
-            <th>Borrow date</th>
-            <th>Due date</th>
+            <th>Ngày mượn</th>
+            <th>Ngày trả</th>
             <th></th>
             <th></th>
             <th></th>
@@ -24,7 +24,7 @@
             <td>{{history.username}}</td>
             <td>{{history.borrow_date}}</td>
             <td>{{history.due_date}}</td>
-            <td><a href="borrow_submit/{{history.borrowing_id}}" class="btn btn-primary pull-right">Xac nhan</a></td>
+            <td><a href="borrow_submit/{{history.borrowing_id}}" class="btn btn-primary pull-right">Xác nhận</a></td>
             <td>
             </td>
         </tr>
