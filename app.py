@@ -213,6 +213,22 @@ def user_info():
     cur.close()
 
 
+@app.route("/delete_user/<string:id>", methods = ["POST"])
+def delete_user(id):
+    cur = mysql.connection.cursor()
+    try:
+        cur.execute("DELETE FROM account WHERE id=%s", [id])      
+        mysql.connection.commit()
+    except(MySQLdb.Error, MySQLdb.Warning) as e:
+        print(e)
+        flash("Usercould not be deleted", "danger")
+        flash(str(e), "danger")
+        return redirect(url_for("books"))
+    finally:
+        cur.close()
+    flash("User Deleted", "success")
+    return redirect(url_for("user_info"))
+
 @app.route("/add_user", methods=["GET", "POST"])
 def add_user():
     form = signUpForm(request.form)
